@@ -1,0 +1,19 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.1"}
+        org.apache.calcite/calcite-core {:mvn/version "1.26.0"}
+        org.apache.calcite/calcite-plus {:mvn/version "1.26.0"}
+        org.apache.calcite/calcite-server {:mvn/version "1.26.0"}
+        org.apache.calcite/calcite-file {:mvn/version "1.26.0"}
+        org.apache.calcite/calcite-csv {:mvn/version "1.26.0"}}
+ :aliases
+ {:test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}}}
+  :runner
+  {:extra-deps {com.cognitect/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "b6b3193fcc42659d7e46ecd1884a228993441182"}}
+   :main-opts ["-m" "cognitect.test-runner"
+               "-d" "test"]}
+  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "1.1.128"}}
+            :main-opts ["-m" "hf.depstar.uberjar" "calcite.jar"
+                        "-C" "-m" "ieugen.calcite"]}}}
