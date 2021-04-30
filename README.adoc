@@ -1,0 +1,48 @@
+= Apache Calcite Clojure examples
+
+Clojure examples for Apache Calcite.
+
+== Installation
+
+Download from https://github.com/ieugen/calcite-clj-examples
+
+== Usage
+
+Browse the code, fork it, change it.
+These are examples to get you started with Calcite in Clojure.
+
+== Examples
+
+[source,shell]
+--
+    clj -X:bindable-example
+
+[Logical plan]
+LogicalSort(sort0=[$0], dir0=[ASC], fetch=[5]): rowcount = 5.0, cumulative cost = {3375.0 rows, 5085.755032994728 cpu, 0.0 io}, id = 8
+  LogicalProject(ID=[$0], TITLE=[$1], year=[$2], EXPR$3=[||(||($5, ' '), $6)]): rowcount = 792.5, cumulative cost = {3370.0 rows, 4957.0 cpu, 0.0 io}, id = 7
+    LogicalFilter(condition=[>($2, 1830)]): rowcount = 792.5, cumulative cost = {2577.5 rows, 1787.0 cpu, 0.0 io}, id = 6
+      LogicalJoin(condition=[=($3, $4)], joinType=[left]): rowcount = 1585.0, cumulative cost = {1785.0 rows, 202.0 cpu, 0.0 io}, id = 5
+        LogicalTableScan(table=[[book]]): rowcount = 100.0, cumulative cost = {100.0 rows, 101.0 cpu, 0.0 io}, id = 1
+        LogicalTableScan(table=[[author]]): rowcount = 100.0, cumulative cost = {100.0 rows, 101.0 cpu, 0.0 io}, id = 3
+
+[Physical plan]
+BindableSort(sort0=[$0], dir0=[ASC], fetch=[5]): rowcount = 5.0, cumulative cost = {1840.0 rows, 3600.755032994728 cpu, 0.0 io}, id = 47
+  BindableProject(ID=[$0], TITLE=[$1], year=[$2], EXPR$3=[||(||($5, ' '), $6)]): rowcount = 792.5, cumulative cost = {1835.0 rows, 3472.0 cpu, 0.0 io}, id = 46
+    BindableJoin(condition=[=($3, $4)], joinType=[left]): rowcount = 792.5, cumulative cost = {1042.5 rows, 302.0 cpu, 0.0 io}, id = 45
+      BindableFilter(condition=[>($2, 1830)]): rowcount = 50.0, cumulative cost = {150.0 rows, 201.0 cpu, 0.0 io}, id = 44
+        BindableTableScan(table=[[book]]): rowcount = 100.0, cumulative cost = {100.0 rows, 101.0 cpu, 0.0 io}, id = 21
+      BindableTableScan(table=[[author]]): rowcount = 100.0, cumulative cost = {100.0 rows, 101.0 cpu, 0.0 io}, id = 23
+
+[1, Les Miserables, 1862, Victor Hugo]
+[4, The three Musketeers, 1844, ALexandre Dumas]
+[5, The Count of Monte Cristo, 1844, ALexandre Dumas]
+
+--
+
+
+== License
+
+Copyright © 2021 Eugen Stan
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
